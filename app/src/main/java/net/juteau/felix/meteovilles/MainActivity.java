@@ -27,35 +27,40 @@ public class MainActivity extends AppCompatActivity {
         editTextCity = findViewById(R.id.editTextCity);
         Button buttonGetWeather = findViewById(R.id.buttonGetWeather);
         listViewWeather = findViewById(R.id.listViewWeather);
-
         villeList = new ArrayList<>();
         villeAdapter = new VilleAdapter(villeList, this);
         listViewWeather.setAdapter(villeAdapter);
-
+        List<VilleEntitie> vL = CsvReader.chargerVilles(this, "villes.csv");
+        for (VilleEntitie ville : vL) {
+            getWeatherData(ville.getNom());
+        }
         buttonGetWeather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String city = editTextCity.getText().toString();
-                weatherApiClient.getWeatherData(city, new WeatherApiClient.WeatherCallback() {
-                    @Override
-                    public void onSuccess(VilleEntitie villeEntitie) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                villeList.add(villeEntitie);
-                                villeAdapter.notifyDataSetChanged();
-                            }
-                        });
-                    }
+                getWeatherData(city);
+            }
+        });
+    }
 
+    public void getWeatherData(String city) {
+        weatherApiClient.getWeatherData(city, new WeatherApiClient.WeatherCallback() {
+            @Override
+            public void onSuccess(VilleEntitie villeEntitie) {
+                runOnUiThread(new Runnable() {
                     @Override
-                    public void onFailure(String errorMessage) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Handle error, possibly show a toast or dialog
-                            }
-                        });
+                    public void run() {
+                        villeList.add(villeEntitie);
+                        villeAdapter.notifyDataSetChanged();
+                    }
+                });
+            }
+            @Override
+            public void onFailure(String errorMessage) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Handle error, possibly show a toast or dialog
                     }
                 });
             }
