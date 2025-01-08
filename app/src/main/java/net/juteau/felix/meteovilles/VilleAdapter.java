@@ -43,9 +43,9 @@ public class VilleAdapter extends BaseAdapter {
         TextView textview_name = itemView.findViewById(R.id.textview_name);
         TextView textview_temp = itemView.findViewById(R.id.textview_temp);
         TextView textview_meteo = itemView.findViewById(R.id.textview_meteo);
-        textview_name.setText("Nom : "+lve.get(position).getNom());
-        textview_temp.setText("Prenom : "+lve.get(position).getTemp());
-        textview_meteo.setText("Job : "+lve.get(position).getMeteo());
+        textview_name.setText("Ville : "+lve.get(position).getNom());
+        textview_temp.setText("Température : "+lve.get(position).getTemp()+" C°");
+        textview_meteo.setText("Météo : "+lve.get(position).getMeteo());
         return itemView;
     }
 }
