@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +19,14 @@ public class MainActivity extends AppCompatActivity {
     private VilleAdapter villeAdapter;
     private List<VilleEntitie> villeList;
     private WeatherApiClient weatherApiClient = new WeatherApiClient();
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout); // Initialisation du SwipeRefreshLayout
         editTextCity = findViewById(R.id.editTextCity);
         Button buttonGetWeather = findViewById(R.id.buttonGetWeather);
         listViewWeather = findViewById(R.id.listViewWeather);
@@ -34,6 +37,22 @@ public class MainActivity extends AppCompatActivity {
         for (VilleEntitie ville : vL) {
             getWeatherData(ville.getNom());
         }
+        // Rafraîchir les données lorsque l'utilisateur fait un swipe
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Rafraîchir les données en rechargeant la météo pour chaque ville
+                villeList.clear(); // Vider la liste actuelle des villes
+                for (VilleEntitie ville : vL) {
+                    getWeatherData(ville.getNom());
+                }
+
+                // Une fois que les données sont rechargées, désactiver le rafraîchissement
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+
         buttonGetWeather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

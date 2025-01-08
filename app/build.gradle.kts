@@ -39,6 +39,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
     implementation("com.google.code.gson:gson:2.8.8")
     implementation ("com.github.bumptech.glide:glide:4.12.0")
+    implementation(libs.swiperefreshlayout)
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
     implementation(libs.constraintlayout)
     testImplementation(libs.junit)
