@@ -5,9 +5,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String city = editTextCity.getText().toString();
                 getWeatherData(city);
+                try {
+                    CsvReader.ajouterVille(MainActivity.this, "villes.csv", city);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -55,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
+
             @Override
             public void onFailure(String errorMessage) {
                 runOnUiThread(new Runnable() {
