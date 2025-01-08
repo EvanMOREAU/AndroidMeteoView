@@ -2,13 +2,17 @@ package net.juteau.felix.meteovilles;
 
 public class VilleEntitie {
     private String nom;
-    private int temp;
+    private Integer temp;
     private String meteo;
 
-    public VilleEntitie(String nom, int temp, String meteo) {
+    public VilleEntitie(String nom, Integer temp, String meteo) {
         this.nom = nom;
         this.temp = temp;
         this.meteo = meteo;
+    }
+
+    public VilleEntitie(String nom) {
+        this.nom = nom;
     }
 
     public String getNom() {
