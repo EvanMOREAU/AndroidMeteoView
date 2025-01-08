@@ -46,7 +46,7 @@ public class VilleAdapter extends BaseAdapter {
         View itemView = inflater.inflate(R.layout.ville_adapter_activity, parent, false);
         TextView textview_name = itemView.findViewById(R.id.textview_name);
         ImageView imageview_weather_icon = itemView.findViewById(R.id.imageview_weather_icon);
-        textview_name.setText(lve.get(position).getNom()+ " • " + lve.get(position).getTemp()+" C°");
+        textview_name.setText(lve.get(position).getNom() + " • " + lve.get(position).getTemp() + " C°");
         String iconUrl = "https://openweathermap.org/img/wn/" + lve.get(position).getIconCode() + ".png";
         Glide.with(context).load(iconUrl).into(imageview_weather_icon);
 
