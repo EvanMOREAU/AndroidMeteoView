@@ -43,10 +43,12 @@ public class WeatherApiClient {
                         String cityName = jsonObject.getString("name");
                         String weatherInfo = jsonObject.getJSONArray("weather")
                                 .getJSONObject(0).getString("description");
+                        String iconCode = jsonObject.getJSONArray("weather")
+                                .getJSONObject(0).getString("icon");
                         int temperature = jsonObject.getJSONObject("main")
                                 .getInt("temp");
 
-                        VilleEntitie villeEntitie = new VilleEntitie(cityName, temperature, weatherInfo);
+                        VilleEntitie villeEntitie = new VilleEntitie(cityName, temperature, weatherInfo, iconCode);
                         callback.onSuccess(villeEntitie);
                     } catch (JSONException e) {
                         callback.onFailure("Erreur d'analyse des données : " + e.getMessage());

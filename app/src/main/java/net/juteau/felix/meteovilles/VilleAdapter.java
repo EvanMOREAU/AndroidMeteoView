@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -41,11 +42,10 @@ public class VilleAdapter extends BaseAdapter {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = inflater.inflate(R.layout.ville_adapter_activity, parent, false);
         TextView textview_name = itemView.findViewById(R.id.textview_name);
-        TextView textview_temp = itemView.findViewById(R.id.textview_temp);
-        TextView textview_meteo = itemView.findViewById(R.id.textview_meteo);
-        textview_name.setText("Ville : "+lve.get(position).getNom());
-        textview_temp.setText("Température : "+lve.get(position).getTemp()+" C°");
-        textview_meteo.setText("Météo : "+lve.get(position).getMeteo());
+        ImageView imageview_weather_icon = itemView.findViewById(R.id.imageview_weather_icon);
+        textview_name.setText(lve.get(position).getNom()+ " • " + lve.get(position).getTemp()+" C°");
+        String iconUrl = "https://openweathermap.org/img/wn/" + lve.get(position).getIconCode() + ".png";
+        Glide.with(context).load(iconUrl).into(imageview_weather_icon);
         return itemView;
     }
 }

@@ -14,15 +14,10 @@
         android:textSize="16sp"
     />
 
-    <TextView
-        android:id="@+id/textview_temp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/textview_meteo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp" />
+    <ImageView
+        android:id="@+id/imageview_weather_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="Icone Météo"/>
 </LinearLayout>
